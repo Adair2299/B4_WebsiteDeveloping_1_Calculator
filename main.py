@@ -19,3 +19,12 @@ def calculate(a, b):
 def get_result(a: float, b: float):
     result = calculate(a, b)
     return {"result": result}
+
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+
+app.mount("/static", StaticFiles(directory="."), name="static")
+
+@app.get("/")
+def home():
+    return FileResponse("index.html")
